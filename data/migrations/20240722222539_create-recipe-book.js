@@ -29,7 +29,7 @@ exports.up = function(knex) {
 })
 .createTable('ingredients', tbl => {
     tbl.increments('ingredient_id')
-    tbl.text('ingredient_name')
+    tbl.text('ingredient_name', 128)
     .notNullable()
     .unique()
 })
