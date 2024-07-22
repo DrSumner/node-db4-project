@@ -29,12 +29,11 @@ exports.up = function(knex) {
 })
 .createTable('ingredients', tbl => {
     tbl.increments('ingredient_id')
-    tbl.text('ingredient_name', 128)
+    tbl.text('ingredient', 128)
     .notNullable()
     .unique()
 })
 .createTable('step_ingredients', tbl => {
-    tbl.increments()
     tbl.integer('step_id')
     .notNullable()
     .unsigned()
@@ -49,6 +48,10 @@ exports.up = function(knex) {
     .inTable('ingredients')
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
+    tbl.decimal('quantity', 8, 3)
+    .notNullable()
+    .unsigned()
+    tbl.primary(['step_id', 'ingredient_id'])
 })
 };
 
